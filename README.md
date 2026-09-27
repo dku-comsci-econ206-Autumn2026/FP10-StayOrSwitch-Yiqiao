@@ -1,262 +1,238 @@
-# Stay or Switch? Strategic Memory Portability in Competing AI Assistants
+<div align="center">
 
-COMSCI/ECON 206 · Problem Set 2 · Phase 2–4B research artifact
+<h1>Stay or Switch?</h1>
+
+<h3>Strategic Memory Portability in Competing AI Assistants</h3>
+
+<p>
+  <strong>COMSCI/ECON 206 · Computational Microeconomics</strong><br>
+  Duke Kunshan University · Autumn 2026<br>
+  <strong>FP10 · Yiqiao Liu</strong>
+</p>
+
+<p><em>When competing AI assistants decide whether user memory should be portable, strategic incentives can sustain both lock-in and conditional portability.</em></p>
+
+<p>
+  <a href="submission/PS2-FP10-StayOrSwitch.pdf"><img alt="Paper" src="https://img.shields.io/badge/Paper-PDF-0B3D91?style=for-the-badge&amp;logo=adobeacrobatreader&amp;logoColor=white"></a>
+  <a href="submission/PS2-FP10-StayOrSwitch-A0-Poster.pdf"><img alt="A0 Poster" src="https://img.shields.io/badge/A0_Poster-PDF-006633?style=for-the-badge&amp;logo=adobeacrobatreader&amp;logoColor=white"></a>
+  <a href="https://huggingface.co/spaces/mickeystk/ps2-stay-or-switch-memory-portability"><img alt="Behavioral Demo" src="https://img.shields.io/badge/Behavioral_Demo-Hugging_Face-5B3FD3?style=for-the-badge"></a>
+</p>
+
+<p>
+  <a href="https://colab.research.google.com/github/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao/blob/main/notebooks/01_memory_portability_bayesian_game.ipynb"><img alt="Open the Bayesian game notebook in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+  <a href="https://colab.research.google.com/github/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao/blob/main/notebooks/02_social_choice_mechanism_auction.ipynb"><img alt="Open the social choice, mechanism, and auction notebook in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+  <a href="#reproducibility"><img alt="Source and reproducibility" src="https://img.shields.io/badge/Source-Reproduce-374151?style=flat-square&amp;logo=github&amp;logoColor=white"></a>
+</p>
+
+</div>
+
+<p align="center">
+  <img src="assets/readme/research_pipeline.svg" width="1000" alt="Research pipeline from competing AI assistants to a behavioral Stay or Switch test, with three disciplines converging into an interdisciplinary synthesis.">
+</p>
 
 ## Research question
 
-**When do competing AI assistants voluntarily adopt memory portability when each platform privately knows its own portability implementation cost, and how does portability affect competition for users?**
+AI assistants accumulate memory about users' preferences, projects, and interaction histories. Competing platforms can either make that memory **Portable (`P`)** or keep it **Locked (`L`)**.
 
-This directory implements the main Bayesian portability game and extends it into social-choice, mechanism-design, and user-allocation analyses. It is deliberately separate from the course templates in the parent repository.
+> **When do competing AI assistants voluntarily make memory portable, when does strategic lock-in persist, and how do welfare, incentive design, allocation, and user behavior change the picture?**
 
-## Current phase scope
+## Strategic model
 
-Implemented here:
+Two platforms—A and B—simultaneously decide whether user memory can move to a rival. Each company privately learns whether portability would be inexpensive or costly for it.
 
-- formal static incomplete-information model;
-- analytical expected-utility benchmark;
-- exhaustive type-level verification of all 16 pure strategy profiles;
-- optional PyGambit Harsanyi-game cross-check and EFG export;
-- symmetric low-type mixed-equilibrium calculation;
-- full-support prior sweep;
-- low-cost/prior sensitivity analysis;
-- raw outputs, figures, tests, and an executed notebook.
-- ex-ante social welfare with a normalized user-mobility component;
-- a verified portability-incentive extension with exhaustive pure-BNE checks;
-- a first-price/second-price allocation application with switching-hurdle reserves;
-- deterministic Phase 3 outputs, figures, tests, and a second executed notebook.
-- a verified literature foundation with claim-level evidence boundaries and
-  citation-ready BibTeX;
-- the locally verified *Stay or Switch?* behavioral Space with fixed scenarios,
-  structured reflection, a benchmark reveal, and prior-play aggregates.
+<p align="center">
+  <img src="assets/readme/payoff_matrix.svg" width="900" alt="Payoff layer inside the Bayesian memory-portability game.">
+</p>
 
-Future work not implemented here:
+**What the four situations mean:**
 
-- collection or analysis of exploratory classroom plays;
-- poster, final paper, symposium review, or AI-market empirical validation.
+- **Mutual portability:** both platforms open memory, and each receives the cooperation benefit minus its own implementation cost.
+- **One portable, one locked:** the open platform bears the cost and is strategically disadvantaged; the locked platform benefits from the asymmetry.
+- **Mutual lock-in:** neither platform opens memory, so both receive the normalized baseline payoff.
 
-## Model summary
+Each platform's private cost is either low or high:
 
-Two generic platforms, A and B, independently draw private portability implementation costs (c_i\in\{c_L,c_H\}). Each observes only its own type and simultaneously chooses Portable (`P`) or Locked (`L`). The common prior is (Pr(c_i=c_L)=p).
+| Parameter | Meaning | Benchmark |
+|---|---|---:|
+| `p` | Probability that a platform has low cost | `0.7` |
+| `c_L` | Low portability cost | `0.2` |
+| `c_H` | High portability cost | `1.2` |
 
-A pure Bayesian strategy is ordered as `(low-type action, high-type action)`:
+Because a company must plan for either possible cost, its strategy specifies an action for **both** types:
 
-- `LL`, `PL`, `LP`, `PP`.
+| Strategy | Low-cost type | High-cost type |
+|:---:|---|---|
+| `LL` | Locked | Locked |
+| `PL` | Portable | Locked |
+| `LP` | Locked | Portable |
+| `PP` | Portable | Portable |
 
-For own cost (c_i), normalized payoffs are:
+If `q` is the probability that the rival chooses Portable and `c` is this platform's private cost:
 
-| Own / rival action | Portable | Locked |
+- **Portable expected payoff:** `3q − 1 − c`
+- **Locked expected payoff:** `q`
+
+The compact decision rule is `Portable when 2q − 1 − c ≥ 0`.
+
+**What this means:** a platform opens memory only when the competitive benefit of portability is large enough to cover its private implementation cost.
+
+### Benchmark equilibria
+
+<p align="center">
+  <img src="assets/readme/benchmark_equilibria.svg" width="900" alt="The benchmark has exactly two pure Bayesian Nash equilibria: mutual lock-in and conditional portability.">
+</p>
+
+At the benchmark, the model has exactly two **pure** Bayesian Nash equilibria:
+
+- **`(LL, LL)` — lock-in:** both low- and high-cost types of both platforms keep memory locked.
+- **`(PL, PL)` — conditional portability:** each low-cost type opens memory, while each high-cost type remains locked.
+
+**What this means:** the same market can support two self-consistent outcomes. Neither platform can profitably change alone in its respective pure equilibrium. These are not the only equilibria overall—a symmetric mixed equilibrium also exists.
+
+<p align="center">
+  <img src="figures/symmetric_pure_bne_by_p.png" width="900" alt="Symmetric pure Bayesian Nash equilibria across the probability of a low portability cost.">
+</p>
+
+<p align="center"><em>As beliefs change, the set of sustainable pure outcomes changes; the computation preserves multiplicity rather than imposing an equilibrium-selection rule.</em></p>
+
+## Three analytical lenses
+
+<p align="center">
+  <img src="assets/readme/three_lenses.svg" width="1000" alt="Economics, computer science, and behavioral science converge into an interdisciplinary synthesis.">
+</p>
+
+- **Economics** identifies incentives, equilibria, welfare comparisons, mechanism effects, and the allocation analogy.
+- **Computer science** implements the model, checks equilibria directly and with PyGambit, runs parameter sweeps and simulations, and tests the results.
+- **Behavioral science** asks how people respond to switching difficulty, personalization, privacy, and trust.
+
+**What this means:** strategic feasibility, modeled collective value, computational verification, and user acceptance are different kinds of evidence. One cannot substitute for another.
+
+## Social choice
+
+**Question:** What outcome would look preferable if we also count the modeled value users receive from moving their memory?
+
+- `LL`: both platforms remain locked.
+- `PL`: only low-cost platform types provide portability.
+- `PP`: both cost types provide portability.
+
+Let `m` denote the modeled user benefit from mutual portability.
+
+| Outcome | Normalized collective objective |
+|:---:|---:|
+| `LL` | `0` |
+| `PL` | `1.68 + 0.49m` |
+| `PP` | `3 + m` |
+
+For the implemented range `m = 0` to `4`, the ranking is `PP > PL > LL`.
+
+<p align="center">
+  <img src="figures/social_welfare_by_m.png" width="850" alt="Normalized collective objective across the modeled user mobility benefit.">
+</p>
+
+**What this means:** mutual portability ranks highest under this stated normalized objective. This is not a universal welfare conclusion: the comparison omits richer consumer differences and real privacy, security, and market effects.
+
+## Mechanism design
+
+**Question:** What if policy or platform design gives firms an extra benefit for verified portability?
+
+Let `τ` denote that portability incentive. As it increases, additional portable equilibria can become feasible.
+
+<p align="center">
+  <img src="assets/readme/mechanism_path.svg" width="1000" alt="Benchmark pure equilibrium sets as the portability incentive increases.">
+</p>
+
+| Incentive `τ` | Pure equilibrium set |
+|---:|---|
+| `0.0` | `LL`, `PL` |
+| `0.2` | `LL`, `PL`, `PP` |
+| `0.8` | `LL`, `PL`, `PP` |
+| `1.2` | `LL`, `PP` |
+| `2.2` | `PP` |
+
+> **Key insight:** Changing incentives is not the same as solving equilibrium selection.
+
+With the incentive, the compact decision rule becomes `Portable when 2q − 1 − c + τ ≥ 0`, where `q` is the chance the rival is portable, `c` is this platform's private cost, and `τ` is the portability incentive.
+
+**What this means:** a moderate incentive can make open outcomes strategically feasible without automatically removing lock-in. Only the largest illustrated incentive makes `PP` the unique pure equilibrium in the verified benchmark sweep. No welfare-optimal incentive is claimed because financing and mechanism costs are not modeled.
+
+<p align="center">
+  <img src="figures/pl_equilibrium_threshold.png" width="820" alt="Computed conditional-portability equilibrium region and analytical threshold.">
+</p>
+
+## Auction application
+
+> **This is an allocation analogy, not a literal auction of users.**
+
+Imagine one user's next-period primary AI-assistant slot as the scarce resource. Portability lowers the modeled switching hurdle, making competitive reassignment easier.
+
+| Portability regime | Switching hurdle `r` | Simulated allocation probability |
 |---|---:|---:|
-| Portable | (2-c_i) | (-1-c_i) |
-| Locked | (1) | (0) |
+| Locked | `0.50` | `0.75193` (about `75%`) |
+| Portable | `0.20` | `0.96004` (about `96%`) |
 
-If the rival is Portable with probability (q),
+The simulation uses `100,000` common valuation draws and seed `20603`.
 
-\[
-EU(P\mid c_i)=3q-1-c_i,\qquad EU(L\mid c_i)=q.
-\]
+<p align="center">
+  <img src="figures/auction_allocation_probability.png" width="820" alt="Simulated allocation probability rises from about 75 percent in the locked regime to about 96 percent in the portable regime.">
+</p>
 
-Portable is therefore a weak best response iff (2q-1\ge c_i). Because types are private, the solution concept is Bayesian Nash equilibrium (BNE), not a fixed complete-information 2×2 Nash equilibrium.
-
-## Implemented benchmark results
-
-At (c_L=0.2), (c_H=1.2), and (p=0.7), the exhaustive direct checker finds exactly two **pure** BNE:
-
-- `(LL, LL)`;
-- `(PL, PL)`.
-
-It finds no asymmetric pure BNE at the benchmark. The type-contingent portability equilibrium becomes sustainable at
-
-\[
-p^*=\frac{1+c_L}{2}=0.6.
-\]
-
-`LL` remains an equilibrium, so the computation preserves multiplicity rather than selecting one outcome.
-
-The baseline also has the symmetric type-specific mixed equilibrium implied by low-type indifference: high types choose Locked and low types choose Portable with probability
-
-\[
-x^*=\frac{1+c_L}{2p}=\frac67\approx0.8571428571.
-\]
-
-This mixed calculation is not presented as a general exhaustive catalog of every mixed BNE under every parameterization.
-
-## Main computational experiments
-
-1. Enumerate all (4\times4=16) pure type-contingent profiles and check each type of each platform separately.
-2. Sweep (p=0.01,0.02,\ldots,0.99), excluding degenerate prior endpoints from the formal full-support analysis.
-3. Calculate the symmetric low-type mixing candidate over the same grid.
-4. Vary (p) and (c_L\in\{0,0.05,\ldots,1.15\}), hold (c_H=1.2), and compare the computed `PL` region with (p=(1+c_L)/2).
-
-## Phase 3 implemented results
-
-### Social choice
-
-The stakeholders are Platform A, Platform B, and users. The normalized
-collective objective is `W = u_A + u_B + U_user`, where users receive a
-mobility benefit `m` only under mutual portability in this binary benchmark.
-Cardinal comparability is an explicit modeling assumption.
-
-At the benchmark:
-
-- `(LL,LL)`: `W=0`;
-- `(PL,PL)`: `W=1.68+0.49m`;
-- `(PP,PP)`: `W=3+m`.
-
-For `m=0.0,0.1,...,4.0`, the computed welfare ranking is always
-`PP > PL > LL`. This does not make `(PP,PP)` a Phase 2 equilibrium: it is a
-welfare comparator, while `(LL,LL)` and `(PL,PL)` are the benchmark pure BNE.
-
-### Verified portability incentive
-
-A Portable action receives a normalized verified-portability benefit `tau`:
-
-\[
-EU_\tau(P\mid c)=3q-1-c+\tau,\qquad EU_\tau(L\mid c)=q.
-\]
-
-For symmetric `PL`, the low-type threshold becomes
-`p >= (1+c_L-tau)/2`, subject also to the high type remaining willing to lock.
-At `p=0.4`, the minimum incentive is `tau=0.4`; at the benchmark `p=0.7`, it
-is zero. `(LL,LL)` remains a weak BNE through `tau=1.2` and disappears only
-above that boundary. At the benchmark, `PL` remains weakly sustainable through
-its high-type boundary `tau=0.8`, while `PP` first appears weakly at `tau=0.2`.
-Thus the mechanism can expand portability equilibria without resolving
-equilibrium selection. No welfare-optimal `tau` is claimed because financing
-and mechanism costs are not modeled.
-
-### Auction/allocation application
-
-The scarce resource is one user's primary AI-assistant slot for the next
-service period. Two platforms have iid normalized private values
-`Uniform(0,1)`. The user's switching hurdle is modeled as a reserve:
-`r_locked=0.5` and `r_portable=0.2`.
-
-Using 100,000 common seeded valuation draws:
-
-- locked allocation probability: `0.75193` versus analytical `0.75`;
-- portable allocation probability: `0.96004` versus analytical `0.96`;
-- unconditional expected payment, first price: `0.41788` locked and `0.36320` portable;
-- unconditional expected payment, second price: `0.41818` locked and `0.36414` portable.
-
-Conditional allocative efficiency is one in all four benchmark conditions.
-First- and second-price payments are close, consistent with benchmark revenue
-equivalence; portability's central modeled effect is the lower reserve and
-higher feasible-allocation probability. The user is not literally auctioned.
-See `docs/auction_boundary.md`.
-
-## Literature foundation
-
-The literature foundation connects the project to four focused areas:
-switching costs and lock-in; data portability, interoperability, and strategic
-compatibility choice; behavioral status quo bias; and standard auction and
-mechanism-design benchmarks. Compatibility is treated as an analogue to memory
-portability rather than the same technical object, and empirical evidence from
-other markets is not presented as an AI-market estimate.
-
-- [Structured literature review](docs/literature_review.md)
-- [Claim-level evidence matrix](docs/literature_evidence_matrix.csv)
-- [Verified BibTeX library](references/references.bib)
-- [Claim–source map](docs/claim_source_map.md)
-- [Future paper evidence map](docs/paper_evidence_map.md)
-- [Verification log](docs/literature_verification_log.md)
+**What this means:** lowering the switching hurdle raises the probability that the slot can be competitively allocated from about 75% to about 96%. These normalized magnitudes are not estimates of real AI markets.
 
 ## Behavioral artifact
 
-[*Stay or Switch?*](behavioral_space/) adds the human-decision layer to the
-project. It asks whether a hypothetical user switches when a simplified
-benchmark says the normalized benefit exceeds the normalized hurdle, after
-first recording an unaided decision and four reflection ratings.
+<p align="center">
+  <a href="https://huggingface.co/spaces/mickeystk/ps2-stay-or-switch-memory-portability"><img alt="Launch Stay or Switch" src="https://img.shields.io/badge/Launch-Stay_or_Switch-0F766E?style=for-the-badge"></a>
+</p>
 
-Run it locally from `ps2_memory_portability/behavioral_space/`:
+<p align="center">
+  <img src="assets/readme/behavioral_flow.svg" width="1000" alt="Behavioral artifact flow from scenario through initial and final choices to a same-session peer comparison.">
+</p>
 
-```bash
-conda run -n cs206-ps2 python app.py
-```
+The artifact follows a simple user journey: see a scenario, choose Stay or Switch, reflect on four 1–7 ratings, see the benchmark, choose again, and optionally compare with earlier plays from the same browser session.
 
-**Status:**
+Here, `g` is the gain from switching and `r` is the switching hurdle. The benchmark says: **Switch when `g > r`.**
 
-- Gradio prototype: locally verified.
-- Static Space: publicly deployed and technically verified.
-- Public Static URL: [Stay or Switch? on Hugging Face](https://huggingface.co/spaces/mickeystk/ps2-stay-or-switch-memory-portability).
-- Peer summaries: current-browser-session only; no backend or persistent behavioral store.
-- Behavioral evidence: not yet analyzed.
+| Portability condition | Switching hurdle `r` |
+|---|---:|
+| Full portability | `0.20` |
+| Partial portability | `0.35` |
+| No portability | `0.50` |
 
-No participant-level behavioral conclusion is claimed.
+The 12 fixed scenarios cross these three conditions with four gain levels. The static deployment stores no persistent participant data; peer summaries reset with the browser page session.
 
-This is an exploratory classroom demonstration, not a representative or
-causal study. Parameters are normalized assumptions, differences from the
-benchmark are not automatically irrational or biased, and the app uses only a
-thread-safe process-memory aggregate that resets on restart. See the
-[artifact specification](docs/behavioral_artifact_specification.md),
-[evidence boundary](docs/behavioral_evidence_boundary.md), and
-[Gradio deployment history](docs/hf_deployment.md), [Static deployment guide](docs/hf_static_deployment.md),
-and [manual test checklist](docs/static_behavioral_manual_test.md).
+> **Evidence status:** Implemented, publicly deployed, and technically verified; no participant-level behavioral conclusion is claimed yet.
 
-## Directory structure
+## Computational verification
+
+| Component | Verification |
+|---|---|
+| Bayesian game | Direct type-level checker + PyGambit cross-check |
+| Comparative statics | Full-support prior and cost sweeps |
+| Social choice and mechanism | Recomputed objective and equilibrium-set sweeps |
+| Auction | Seeded simulation + analytical allocation check |
+| Behavioral artifact | Scenario, privacy, parity, and deployment validation |
+
+**Current validated result: 85/85 tests passed.** Machine-readable evidence is retained in [`outputs/`](outputs/), with claim boundaries and audit trails in [`docs/`](docs/).
+
+## Repository structure
 
 ```text
-ps2_memory_portability/
-├── README.md
-├── requirements.txt
-├── environment.yml
-├── docs/
-│   ├── model_specification.md
-│   ├── reproducibility.md
-│   ├── phase3_open_questions.md
-│   ├── phase3_model_specification.md
-│   ├── auction_boundary.md
-│   ├── behavioral_artifact_specification.md
-│   ├── behavioral_evidence_boundary.md
-│   ├── hf_deployment.md
-│   ├── literature_review.md
-│   ├── literature_evidence_matrix.csv
-│   ├── claim_source_map.md
-│   ├── paper_evidence_map.md
-│   └── literature_verification_log.md
-├── references/
-│   └── references.bib
-├── notebooks/
-│   ├── 01_memory_portability_bayesian_game.ipynb
-│   └── 02_social_choice_mechanism_auction.ipynb
-├── behavioral_space/
-│   ├── app.py
-│   ├── core.py
-│   ├── store.py
-│   ├── ui_text.py
-│   ├── requirements.txt
-│   └── README.md
-├── src/memory_portability/
-│   ├── __init__.py
-│   ├── model.py
-│   ├── pygambit_model.py
-│   ├── analysis.py
-│   ├── social_choice.py
-│   ├── mechanism.py
-│   └── auction.py
-├── scripts/
-│   ├── run_phase2.py
-│   ├── build_notebook.py
-│   ├── execute_notebook.py
-│   ├── run_phase3.py
-│   ├── build_phase3_notebook.py
-│   ├── execute_phase3_notebook.py
-│   ├── run_behavioral_validation.py
-│   └── deploy_behavioral_space.py
-├── tests/
-│   ├── test_model.py
-│   ├── test_social_choice.py
-│   ├── test_mechanism.py
-│   ├── test_auction.py
-│   └── test_behavioral_space.py
-├── outputs/
-└── figures/
+src/                       core model and analysis
+notebooks/                 runnable Bayesian and Phase 3 analyses
+outputs/                   generated model results and validations
+figures/                   generated scientific figures
+assets/readme/             README-specific explanatory diagrams
+behavioral_static_space/   deployed behavioral artifact source
+paper/                     LaTeX paper source
+poster/                    A0 poster source and build tooling
+submission/                review-ready course deliverables
+tests/                     automated validation
+docs/                      evidence maps, literature checks, and audits
 ```
 
-## Environment setup
+## Reproducibility
 
-The tested environment uses Python 3.12 in an isolated Conda environment named `cs206-ps2`. Do not modify Anaconda `base`.
-
-From this directory:
+The pinned environment uses Python 3.12. From the repository root:
 
 ```bash
 conda env create -f environment.yml
@@ -270,114 +246,35 @@ If the environment already exists:
 conda run -n cs206-ps2 python -m pip install -r requirements.txt
 ```
 
-PyGambit is isolated in `pygambit_model.py`. The direct type-level checker in `model.py` is authoritative and does not import PyGambit. See `docs/reproducibility.md` and `outputs/benchmark_verification.json` for the actual cross-check status of the recorded run.
-
-In the recorded Phase 2 run, PyGambit 16.7.0 imported successfully, its pure-equilibrium solver returned the same two pure BNE as the direct checker, and the benchmark EFG export was written. PyGambit remains optional so that the core analysis is still reproducible on systems where its compiled dependency cannot be installed.
-
-## Regenerate outputs
-
-Run one command from this directory:
+Regenerate verified outputs and run the complete suite:
 
 ```bash
 conda run -n cs206-ps2 python scripts/run_phase2.py
-```
-
-The runner validates the benchmark, attempts the PyGambit cross-check, writes the JSON and CSV results, and regenerates both figures. It fails if the core benchmark, threshold, or solver agreement is wrong.
-
-Generate all Phase 3 outputs from the same directory with:
-
-```bash
 conda run -n cs206-ps2 python scripts/run_phase3.py
-```
-
-This runner first checks that the Phase 2 benchmark remains unchanged, then
-generates and validates the social-choice, mechanism, and auction results.
-
-## Run tests
-
-```bash
 conda run -n cs206-ps2 python -m unittest discover -s tests -v
 ```
 
-The core tests do not require PyGambit. Its agreement test is explicitly skipped if the optional dependency cannot import.
+PyGambit is isolated from the authoritative direct checker. If unavailable, its agreement test is skipped with a stated reason while the remaining tests still run. See [`docs/reproducibility.md`](docs/reproducibility.md).
 
-## Build and execute the notebook
+## Evidence boundaries
 
-The tracked notebook is generated from reviewed Markdown and lightweight calls to the package:
+- Equilibrium results belong to the stated stylized private-cost game.
+- Collective rankings depend on the normalized objective and cardinal comparability.
+- The auction is a stylized allocation analogy; it neither auctions users nor calibrates an AI market.
+- The behavioral artifact is technically verified but has not produced participant-level evidence.
+- Real-world portability also involves privacy, security, network effects, multihoming, and heterogeneous preferences.
 
-```bash
-conda run -n cs206-ps2 python scripts/build_notebook.py
-conda run -n cs206-ps2 python scripts/execute_notebook.py
-```
+## Selected references
 
-`execute_notebook.py` launches a fresh `cs206-ps2` kernel and saves actual cell outputs. The notebook's first code cell calls `run_phase2.py`, so a top-to-bottom execution regenerates the underlying results without hidden manual state.
+- Jeon, D.-S., Menicucci, D., & Nasr, N. (2023). [Compatibility Choices, Switching Costs, and Data Portability](https://doi.org/10.1257/mic.20200309). *American Economic Journal: Microeconomics, 15*(1), 30–73.
+- Farrell, J., & Klemperer, P. (2007). [Coordination and Lock-In: Competition with Switching Costs and Network Effects](https://doi.org/10.1016/S1573-448X(06)03031-7). In *Handbook of Industrial Organization* (Vol. 3, pp. 1967–2072).
+- Viard, V. B. (2007). [Do Switching Costs Make Markets More or Less Competitive? The Case of 800-Number Portability](https://doi.org/10.1111/j.1756-2171.2007.tb00049.x). *The RAND Journal of Economics, 38*(1), 146–163.
+- Kim, J.-Y. (2026). [Data Portability and Interoperability Between Digital Platforms](https://doi.org/10.1111/jems.12643). *Journal of Economics & Management Strategy, 35*(2), 219–232.
+- Samuelson, W., & Zeckhauser, R. (1988). [Status Quo Bias in Decision Making](https://doi.org/10.1007/BF00055564). *Journal of Risk and Uncertainty, 1*(1), 7–59.
+- Vickrey, W. (1961). [Counterspeculation, Auctions, and Competitive Sealed Tenders](https://doi.org/10.1111/j.1540-6261.1961.tb02789.x). *The Journal of Finance, 16*(1), 8–37.
 
-Build and execute the Phase 3 notebook with:
+The complete verified bibliography and literature audit are in [`references/references.bib`](references/references.bib) and [`docs/literature_verification_log.md`](docs/literature_verification_log.md).
 
-```bash
-conda run -n cs206-ps2 python scripts/build_phase3_notebook.py
-conda run -n cs206-ps2 python scripts/execute_phase3_notebook.py
-```
+## AI assistance
 
-## Output inventory
-
-- `outputs/benchmark_verification.json`: parameters, formulas, all 16 profile diagnostics, pure BNE, mixed benchmark, environment, and PyGambit status.
-- `outputs/pure_bne_p_sweep.csv`: all 16 profiles at each of 99 full-support prior values.
-- `outputs/symmetric_mixed_equilibrium_p_sweep.csv`: analytical low-type mixing candidate over the prior grid.
-- `outputs/pl_equilibrium_sensitivity.csv`: computed and analytical `PL` classification over the ((p,c_L)) grid.
-- `outputs/memory_portability_benchmark.efg`: written only after a successful PyGambit construction and solver agreement.
-- `figures/symmetric_pure_bne_by_p.png`: multiplicity-preserving symmetric pure-equilibrium tracks.
-- `figures/pl_equilibrium_threshold.png`: computed `PL` region with the analytical boundary.
-- `outputs/social_choice_benchmark.csv`: benchmark welfare decomposition at `m=1`.
-- `outputs/social_choice_m_sweep.csv`: welfare and equilibrium status over the `m` grid.
-- `outputs/mechanism_p_tau_sweep.csv`: all 16 profiles over 99 priors and 51 incentive values.
-- `outputs/mechanism_thresholds.json`: formulas, boundary checks, and sweep diagnostics.
-- `outputs/auction_summary.csv`: four-condition allocation, payment, utility, and efficiency summary.
-- `outputs/auction_validation.json`: seed, assumptions, analytical comparisons, and revenue gaps.
-- `outputs/auction_simulation_sample.csv`: deterministic 400-row validation sample.
-- `outputs/behavioral_scenario_catalog.csv`: the 12 predetermined scenario
-  definitions; this is not participant data.
-- `outputs/behavioral_validation.json`: design, environment, smoke-test, and
-  deployment validation metadata; this is not participant data.
-- `figures/social_welfare_by_m.png`: welfare comparison with equilibrium labels.
-- `figures/pl_equilibrium_region_with_incentive.png`: computed `PL` region and both type boundaries.
-- `figures/ll_equilibrium_region_with_incentive.png`: persistence of lock-in under incentives.
-- `figures/auction_allocation_probability.png`: locked versus portable allocation probability.
-- `figures/auction_expected_payment.png`: unconditional expected payments.
-- `figures/auction_bid_functions.png`: reserve-adjusted first-price and truthful second-price bids.
-
-## Reproducibility conventions
-
-- The formal prior grid is constructed from integers, not floating-point stepping.
-- It includes (p=0.60) exactly as a reported grid value.
-- Formal sweeps use (0<p<1); `p=0` and `p=1` are flagged as boundary cases.
-- Equilibrium logic uses unrounded values and an explicit numerical tolerance.
-- Saved CSVs expose profile-level diagnostics rather than only selected equilibria.
-- The notebook imports the tested source package instead of duplicating the model.
-
-## Evidence boundary and limitations
-
-The code establishes computational properties of the benchmark model under the stated assumptions. It does not show that actual platforms have these costs or payoffs, that a particular equilibrium will be selected, or that users are better off.
-
-Key limitations are normalized payoffs, binary portability, symmetric platforms,
-independent private types, cardinal welfare comparability, unresolved equilibrium
-selection, an uncosted reduced-form incentive, and a stylized one-user auction
-that abstracts from actual market dynamics. No behavioral or real-user evidence
-has been collected.
-
-## AI-use disclosure
-
-Student intellectual decisions include the research question, memory-portability framing, choice of a static incomplete-information game, players, types, actions, strategic interpretation, benchmark model, and computational questions.
-
-AI/Codex assistance includes code implementation, debugging, mathematical and computational verification, organization, test construction, and documentation support. Codex did not originate the research question or the project's economic contribution.
-
-## Remaining work
-
-The social-choice, mechanism-design, and auction decisions formerly listed as
-open Phase 3 questions are implemented under the explicit normalized
-assumptions above, and the Phase 4A literature foundation is verified and
-documented. The behavioral artifact is implemented and locally verified, but
-no participant evidence has been collected. Remaining work includes optional
-exploratory classroom plays, the paper, author notes or appendices, A0 poster,
-symposium materials, and cross-artifact verification. None of that remaining
-work is represented as complete here.
+The research question, modeling choices, interpretation, evidence boundaries, and final intellectual decisions are the student's. AI tools were used for bounded implementation assistance, debugging, verification workflows, documentation, and formatting. AI did not independently originate the research contribution.

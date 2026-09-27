@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title desc">
+  <title id="title">Three analytical lenses</title>
+  <desc id="desc">Economics, computer science, and behavioral science contribute complementary methods that converge into an interdisciplinary synthesis of strategic feasibility, social value, computational verification, and behavioral acceptance.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L11,5.5 L0,11 z" fill="#64748b"/></marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.10"/></filter>
+    <style>
+      .font { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .head { font-size: 22px; font-weight: 750; fill: #ffffff; text-anchor: middle; letter-spacing: 0.8px; }
+      .item { font-size: 18px; fill: #334155; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="680" rx="28" fill="#f8fafc"/>
+  <text class="font" x="600" y="50" font-size="29" font-weight="750" fill="#0f172a" text-anchor="middle">Three lenses, one research question</text>
+
+  <g class="font" filter="url(#shadow)">
+    <rect x="40" y="92" width="350" height="328" rx="22" fill="#ffffff" stroke="#3b82f6" stroke-width="2"/>
+    <rect x="40" y="92" width="350" height="70" rx="22" fill="#2563eb"/>
+    <path d="M40 136 H390 V162 H40 Z" fill="#2563eb"/>
+    <text class="head" x="215" y="145">ECONOMICS</text>
+    <text class="item" x="215" y="208">Bayesian game</text>
+    <text class="item" x="215" y="248">Bayesian Nash equilibrium</text>
+    <text class="item" x="215" y="288">Social welfare</text>
+    <text class="item" x="215" y="328">Mechanism design</text>
+    <text class="item" x="215" y="368">Auction comparison</text>
+
+    <rect x="425" y="92" width="350" height="328" rx="22" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <rect x="425" y="92" width="350" height="70" rx="22" fill="#4f46e5"/>
+    <path d="M425 136 H775 V162 H425 Z" fill="#4f46e5"/>
+    <text class="head" x="600" y="135">COMPUTER SCIENCE</text>
+    <text class="item" x="600" y="208">Direct equilibrium checker</text>
+    <text class="item" x="600" y="248">PyGambit verification</text>
+    <text class="item" x="600" y="288">Parameter sweeps</text>
+    <text class="item" x="600" y="328">Reproducible simulation</text>
+    <text class="item" x="600" y="368">Automated tests</text>
+
+    <rect x="810" y="92" width="350" height="328" rx="22" fill="#ffffff" stroke="#14b8a6" stroke-width="2"/>
+    <rect x="810" y="92" width="350" height="70" rx="22" fill="#0f766e"/>
+    <path d="M810 136 H1160 V162 H810 Z" fill="#0f766e"/>
+    <text class="head" x="985" y="135">BEHAVIORAL SCIENCE</text>
+    <text class="item" x="985" y="208">Stay / Switch choice</text>
+    <text class="item" x="985" y="248">Switching difficulty</text>
+    <text class="item" x="985" y="288">Personalization concern</text>
+    <text class="item" x="985" y="328">Privacy concern</text>
+    <text class="item" x="985" y="368">Trust</text>
+  </g>
+
+  <g stroke="#64748b" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M215 425 C215 465, 405 452, 455 497"/>
+    <line x1="600" y1="425" x2="600" y2="492"/>
+    <path d="M985 425 C985 465, 795 452, 745 497"/>
+  </g>
+  <g fill="#64748b">
+    <path d="M447 489 L463 498 L448 505 Z"/>
+    <path d="M592 491 H608 L600 505 Z"/>
+    <path d="M753 489 L737 498 L752 505 Z"/>
+  </g>
+
+  <g class="font" filter="url(#shadow)">
+    <rect x="250" y="505" width="700" height="132" rx="24" fill="#172554"/>
+    <text x="600" y="548" font-size="23" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="0.8">INTERDISCIPLINARY SYNTHESIS</text>
+    <text x="600" y="583" font-size="17" fill="#dbeafe" text-anchor="middle">When does portability become strategically feasible, socially attractive,</text>
+    <text x="600" y="610" font-size="17" fill="#dbeafe" text-anchor="middle">computationally verifiable, and behaviorally accepted?</text>
+  </g>
+</svg>
