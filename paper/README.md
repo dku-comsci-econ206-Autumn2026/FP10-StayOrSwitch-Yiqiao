@@ -21,7 +21,9 @@ working-copy driver for the official guidance rail.
 
 ## Evidence snapshot
 
-- GitHub computational/deployment snapshot: `f9523b0fdd3f5dc4739dd1f08fe1265e049c1271`
+- Canonical repository: <https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
+- Historical computational/deployment snapshot:
+  `f9523b0fdd3f5dc4739dd1f08fe1265e049c1271`
 - Public behavioral Space revision: `9ffb3cadcb80d558cb1d4473d227a383b8a5aa50`
 - Test status at paper build: 85 passed, 0 skipped, 0 failures, 0 errors
 - Behavioral conclusion: none claimed

@@ -1,5 +1,7 @@
 # Future Paper Evidence Map
 
+Canonical repository: <https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
+
 This map separates three kinds of support for the future two-page paper:
 published literature, results produced by this project's stated model, and
 artifacts that make those results auditable.

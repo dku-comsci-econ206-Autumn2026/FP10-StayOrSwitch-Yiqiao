@@ -1,6 +1,6 @@
 {
   "model_title": "Stay or Switch? Strategic Memory Portability in Competing AI Assistants",
-  "generated_at_utc": "2026-09-24T01:33:12.051551+00:00",
+  "generated_at_utc": "2026-09-27T05:48:47.524339+00:00",
   "parameters": {
     "c_low": 0.2,
     "c_high": 1.2,
@@ -1400,8 +1400,8 @@
     }
   },
   "generation_context": {
-    "base_head_before_phase2_commit": "5c6d30bf75603a33af5dbba6f1a4179cd873c0fc",
+    "base_head_before_phase2_commit": "9aec4bfc175ecbba8708918ffb9510332b567f07",
     "working_tree_clean_at_generation": false,
-    "working_tree_status_at_generation": "?? ps2_memory_portability/"
+    "working_tree_status_at_generation": "M behavioral_space/README.md\n M behavioral_static_space/README.md\n M docs/hf_deployment.md\n M docs/hf_static_deployment.md\n M docs/paper_evidence_map.md\n M docs/reproducibility.md\n M docs/review_ready_paper_audit.md\n M docs/review_ready_poster_audit.md\n M notebooks/01_memory_portability_bayesian_game.ipynb\n M notebooks/02_social_choice_mechanism_auction.ipynb\n M paper/OVERLEAF_IMPORT_INSTRUCTIONS.md\n M paper/README.md\n M paper/annotated.tex\n M paper/appendices/supporting.tex\n M paper/main.tex\n M paper/sections/proposal.tex\n M poster/.gitignore\n M poster/assets/github_qr.png\n M poster/build_poster.mjs\n M poster/generate_qr.mjs\n M scripts/build_notebook.py\n M scripts/build_phase3_notebook.py\n M scripts/run_phase2.py\n M submission/PS2-FP10-StayOrSwitch-A0-Poster.pdf\n M submission/PS2-FP10-StayOrSwitch-A0-Poster.pptx\n M submission/PS2-FP10-StayOrSwitch-Overleaf-Source.zip\n M submission/PS2-FP10-StayOrSwitch.pdf\n M submission/PS2_Yiqiao_Liu_review_ready.pdf\n M submission/PS2_Yiqiao_Liu_review_ready_A0_poster.pdf\n M submission/PS2_Yiqiao_Liu_review_ready_A0_poster.pptx\n M submission/PS2_Yiqiao_Liu_review_ready_overleaf_source.zip\n?? src/memory_portability/__pycache__/\n?? tmp/"
   }
 }

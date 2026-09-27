@@ -133,7 +133,7 @@ def run_pygambit_cross_check() -> dict[str, object]:
 
 
 def git_generation_context() -> dict[str, object]:
-    repository_root = PROJECT_ROOT.parent
+    repository_root = PROJECT_ROOT
     head = subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=repository_root,

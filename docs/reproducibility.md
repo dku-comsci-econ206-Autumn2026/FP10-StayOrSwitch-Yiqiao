@@ -1,5 +1,11 @@
 # Reproducibility
 
+Canonical repository:
+<https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
+
+Clone URL:
+`https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao.git`
+
 ## Recorded host
 
 - Operating system: macOS 26.5.2
@@ -34,7 +40,7 @@ conda run -n cs206-ps2 python -m ipykernel install --user \
 
 ## Regenerate all computational outputs
 
-Run from `ps2_memory_portability/`:
+Run from the repository root:
 
 ```bash
 conda run -n cs206-ps2 python scripts/run_phase2.py
@@ -104,7 +110,7 @@ The machine-readable sweeps contain only (p=0.01,0.02,\ldots,0.99). At (p=0) or 
 ## Phase 3 regeneration
 
 Phase 3 uses only NumPy, pandas, Matplotlib, and the Python standard library in
-the existing `cs206-ps2` environment. From `ps2_memory_portability/`, run:
+the existing `cs206-ps2` environment. From the repository root, run:
 
 ```bash
 conda run -n cs206-ps2 python scripts/run_phase3.py

@@ -1,20 +1,22 @@
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { FileBlob, PresentationFile } from "@oai/artifact-tool";
 
-const workspaceDir = "/Users/mickeyxiaoliuliu/Desktop/DKU curriculums/cs206/gt-tools-demos";
-const projectDir = path.join(workspaceDir, "ps2_memory_portability");
-const posterDir = path.join(projectDir, "poster");
+const posterDir = path.dirname(fileURLToPath(import.meta.url));
+const projectDir = path.dirname(posterDir);
+const workspaceDir = projectDir;
 const buildDir = path.join(posterDir, ".build");
+const validationDir = path.join(posterDir, ".validation");
 const submissionDir = path.join(projectDir, "submission");
 const sourceTemplatePath = "/Users/mickeyxiaoliuliu/Desktop/DKU curriculums/cs206/ps2的一些模版/COMSCI_ECON206_PS2_A0_Poster_Template.pptx";
 const skillDir = "/Users/mickeyxiaoliuliu/.codex/plugins/cache/openai-primary-runtime/presentations/26.904.11930/skills/presentations";
 const runtimePython = "/Users/mickeyxiaoliuliu/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3";
 const outputVersion = process.env.POSTER_BUILD_VERSION ?? "v1";
 const finalizerPath = path.join(buildDir, `finalized-${outputVersion}.pptx`);
-const deliveryPath = path.join(submissionDir, "PS2_Yiqiao_Liu_review_ready_A0_poster.pptx");
+const deliveryPath = path.join(submissionDir, "PS2-FP10-StayOrSwitch-A0-Poster.pptx");
+const legacyDeliveryPath = path.join(submissionDir, "PS2_Yiqiao_Liu_review_ready_A0_poster.pptx");
 
 const BLUE = "#003399";
 const GREEN = "#006633";
@@ -26,7 +28,7 @@ const FONT = "Calibri";
 
 await fs.mkdir(buildDir, { recursive: true });
 await fs.mkdir(submissionDir, { recursive: true });
-await fs.mkdir(path.join(workspaceDir, ".validation"), { recursive: true });
+await fs.mkdir(validationDir, { recursive: true });
 
 const templateBytes = await fs.readFile(sourceTemplatePath);
 const templateSha256 = crypto.createHash("sha256").update(templateBytes).digest("hex");
@@ -247,7 +249,7 @@ resultTable.cells.block({ row: 1, column: 2, rowCount: 4, columnCount: 1 }).assi
   textStyle: { typeface: FONT, fontSize: 25, color: GREEN, alignment: "left" },
 });
 setRichText("result-caption", [
-  lead("Table 1. ", "Verified outputs at GitHub snapshot f9523b0.", 340),
+  lead("Table 1. ", "Verified outputs in the canonical FP10 repository.", 340),
   lead("Interpretation: ", "Portability can improve the collective comparator and allocation access while equilibrium multiplicity remains.", 340),
   lead("Verification: ", "PyGambit agreement, 85/85 tests, and seed 20603.", 340),
   lead("Evidence status: ", "Platform results are analytical or simulated. The user test has no participant data.", 0),
@@ -287,7 +289,7 @@ setText("references", [
 ], { fontSize: 18, color: INK, lineSpacing: 0.91 });
 
 const hfUrl = "https://huggingface.co/spaces/mickeystk/ps2-stay-or-switch-memory-portability";
-const githubUrl = "https://github.com/micL1222/gt-tools-demos/tree/ps2-memory-portability";
+const githubUrl = "https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao";
 const access = setRichText("access-links", [
   { runs: [{ run: "Hugging Face: ", textStyle: { bold: true, color: BLUE } }, { run: hfUrl, textStyle: { color: BLUE, underline: "sng" }, link: { uri: hfUrl, isExternal: true } }], spaceAfter: 260 },
   { runs: [{ run: "GitHub: ", textStyle: { bold: true, color: GREEN } }, { run: githubUrl, textStyle: { color: GREEN, underline: "sng" }, link: { uri: githubUrl, isExternal: true } }] },
@@ -325,8 +327,8 @@ slide.speakerNotes.append([
   "",
   "Poster evidence record, review-ready v1:",
   "Paper baseline: commit 43a2941184d8130852af3c1f88fc90e8b2fd9fc6.",
-  "Model/output evidence: ps2_memory_portability/outputs and tests at snapshot f9523b0.",
-  "Public URLs returned HTTP 200 on 2026-09-26: " + hfUrl + " and " + githubUrl + ".",
+  "Model/output evidence: outputs and tests in " + githubUrl + "; historical baseline f9523b0.",
+  "Public URLs returned HTTP 200 on 2026-09-27: " + hfUrl + " and " + githubUrl + ".",
   "QR targets were generated locally and decoded back to the displayed URLs.",
   "No participant result, symposium feedback, or classroom auction-play evidence is claimed.",
 ].join("\n"));
@@ -376,7 +378,8 @@ const result = await finalizePresentation({
     referenceSha256: templateSha256,
   },
   verifyArtifactToolImport: true,
-  receiptPath: path.join(workspaceDir, ".validation", `poster-${outputVersion}.json`),
+  receiptPath: path.join(validationDir, `poster-${outputVersion}.json`),
 });
 await fs.copyFile(finalizerPath, deliveryPath);
-console.log(JSON.stringify({ deliveryPath, finalizerPath, templateSha256, result }, null, 2));
+await fs.copyFile(finalizerPath, legacyDeliveryPath);
+console.log(JSON.stringify({ deliveryPath, legacyDeliveryPath, finalizerPath, templateSha256, result }, null, 2));

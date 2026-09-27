@@ -232,6 +232,8 @@ docs/                      evidence maps, literature checks, and audits
 
 ## Reproducibility
 
+Canonical project repository: <https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
+
 The pinned environment uses Python 3.12. From the repository root:
 
 ```bash

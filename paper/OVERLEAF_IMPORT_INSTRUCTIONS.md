@@ -11,4 +11,4 @@
    `MANUAL_INPUTS_REQUIRED.md`; do not insert invented peer or symposium data.
 
 The ZIP deliberately excludes build products and the compiled PDF. The latter
-is delivered separately in `ps2_memory_portability/submission/`.
+is delivered separately in the repository's `submission/` directory.

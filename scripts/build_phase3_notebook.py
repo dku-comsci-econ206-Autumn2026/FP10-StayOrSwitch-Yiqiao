@@ -321,7 +321,7 @@ competitive reallocation feasible more often.
 
 ### 22. Reproducibility
 
-From `ps2_memory_portability/`:
+From the repository root:
 
 ```bash
 conda run -n cs206-ps2 python scripts/run_phase3.py

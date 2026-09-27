@@ -312,7 +312,7 @@ Under the stated assumptions, the computation establishes that lock-in is always
 
 ## 16. Reproducibility
 
-From `ps2_memory_portability/`, regenerate all outputs with:
+From the repository root, regenerate all outputs with:
 
 ```bash
 conda run -n cs206-ps2 python scripts/run_phase2.py

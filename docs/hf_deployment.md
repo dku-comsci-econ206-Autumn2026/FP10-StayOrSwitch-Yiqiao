@@ -2,7 +2,7 @@
 
 ## Original approach: Gradio prototype
 
-- Local path: `ps2_memory_portability/behavioral_space/`
+- Local path from repository root: `behavioral_space/`
 - Conda environment: `cs206-ps2`
 - Python: 3.12
 - Gradio: 6.28.0
@@ -12,7 +12,7 @@
 Local launch:
 
 ```bash
-cd ps2_memory_portability/behavioral_space
+cd behavioral_space
 conda run -n cs206-ps2 python app.py
 ```
 

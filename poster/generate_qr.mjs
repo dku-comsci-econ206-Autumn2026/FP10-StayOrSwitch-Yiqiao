@@ -12,7 +12,7 @@ const targets = [
   },
   {
     label: "GitHub",
-    value: "https://github.com/micL1222/gt-tools-demos/tree/ps2-memory-portability",
+    value: "https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao",
     file: "github_qr.png",
   },
 ];

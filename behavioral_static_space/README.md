@@ -97,4 +97,4 @@ This artifact does not establish:
 
 ## Source project
 
-This Static Space is the public-deployment counterpart to the locally verified Gradio prototype in the [`ps2-memory-portability` project](https://github.com/micL1222/gt-tools-demos/tree/ps2-memory-portability/ps2_memory_portability).
+This Static Space is the public-deployment counterpart to the locally verified Gradio prototype in the [canonical FP10 organization repository](https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao).

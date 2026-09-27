@@ -1,10 +1,13 @@
 # Review-Ready Paper Evidence and Parity Audit
 
+Canonical repository: <https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
+
 ## Scope
 
-This audit checks the official-template paper against repository snapshot
-`f9523b0fdd3f5dc4739dd1f08fe1265e049c1271`. It is a technical and evidentiary
-check, not peer review or participant evidence.
+This audit checks the official-template paper against the canonical repository.
+The original scientific baseline was audited at historical snapshot
+`f9523b0fdd3f5dc4739dd1f08fe1265e049c1271`. It is a technical and
+evidentiary check, not peer review or participant evidence.
 
 Official team code: FP10
 
@@ -28,7 +31,7 @@ Final Overleaf source: `submission/PS2-FP10-StayOrSwitch-Overleaf-Source.zip`
 | Behavioral artifact has 12 balanced scenarios and rule `Switch iff g>r` | `behavioral_scenario_catalog.csv`, `behavioral_validation.json` | Matched |
 | Public Space is deployed and technically verified | `behavioral_validation.json`, public URL | Matched |
 | No participant-level behavioral conclusion | evidence-boundary documents | Preserved throughout |
-| Full regression suite passes | From `ps2_memory_portability/`: `conda run -n cs206-ps2 python -m unittest discover -s tests -v` | 85 passed, 0 skipped/failures/errors |
+| Full regression suite passes | From the repository root: `conda run -n cs206-ps2 python -m unittest discover -s tests -v` | 85 passed, 0 skipped/failures/errors |
 
 ## Literature parity
 
@@ -41,7 +44,8 @@ project-generated equilibria.
 
 ## Cross-artifact status
 
-- **GitHub:** same model, parameters, outputs, commit, commands, and limits.
+- **GitHub:** canonical FP10 organization repository; same model, parameters,
+  outputs, commands, and limits.
 - **Hugging Face:** same user-level decision setting, 12 scenarios, evidence
   boundary, and current-page-session privacy scope.
 - **A0 poster:** not yet created; paper marks it planned and makes no parity
@@ -69,12 +73,16 @@ project-generated equilibria.
 - The source ZIP contains 22 files, excludes build products, and was extracted
   into a clean temporary directory. Both `main.tex` and `annotated.tex`
   compiled there to 7-page PDFs with resolved references and no overfull boxes.
-- PS2 regression command was rerun from `ps2_memory_portability/`: 85 tests
-  passed in 1.873 seconds; 0 failures, errors, or skips.
+- Both notebooks were executed locally in the recorded `cs206-ps2` environment
+  without cell errors.
+- PS2 regression command was rerun from the repository root on 2026-09-27:
+  85 tests passed in 1.197 seconds; 0 failures, errors, or skips.
+- Active source, generated paper, ZIP, poster, notebook, and deployment-reference
+  scans found no legacy personal-repository URL or former branch URL.
 - Review-ready PDF SHA-256:
-  `01604ed055d3d835566aec2ac67957803d8666345ed85e9e2671ddecd10e6966`.
+  `dd666c77f903b950193bd28a1f698519c5a65653077c8d5946cdfd48a3673d85`.
 - Overleaf source ZIP SHA-256:
-  `6406aeb0aad8c99556a07076c842f15e2cfdcb493f23ebf711a3a409e3ed1322`.
+  `7c8f123eaaeb61427a850501cfb98bf45b4fa8adae77812c8c6dd8f2a55c05b2`.
 
 ## Manual facts still required
 

@@ -70,4 +70,4 @@ conda run -n cs206-ps2 python app.py
 Then open `http://127.0.0.1:7860`.
 
 The broader computational project and its evidence boundaries are maintained in
-the [`ps2-memory-portability` branch](https://github.com/micL1222/gt-tools-demos/tree/ps2-memory-portability/ps2_memory_portability).
+the [canonical FP10 organization repository](https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao).

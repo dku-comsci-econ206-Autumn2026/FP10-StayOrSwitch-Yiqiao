@@ -32,7 +32,7 @@ behavioral store, so this deployment does not create a cross-visitor dataset.
 6. Create the Space.
 7. Open its **Files** tab.
 8. Upload exactly the five files listed below from
-   `ps2_memory_portability/behavioral_static_space/`:
+   `behavioral_static_space/` from the repository root:
 
    ```text
    README.md

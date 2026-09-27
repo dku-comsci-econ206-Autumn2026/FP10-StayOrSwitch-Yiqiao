@@ -1,10 +1,12 @@
 # Review-ready A0 poster audit
 
-Audit date: 2026-09-26 (Asia/Shanghai)
+Canonical repository: <https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
+
+Audit date: 2026-09-27 (Asia/Shanghai)
 
 Paper baseline: `43a2941184d8130852af3c1f88fc90e8b2fd9fc6`
 
-Model/output snapshot named in the paper and poster: `f9523b0`
+Historical model/output baseline: `f9523b0`
 
 Official team code: FP10
 
@@ -25,14 +27,14 @@ Official team code: FP10
 | PPTX slide size | `42804000 × 30276000` EMU = `1189 × 841 mm` landscape |
 | PDF page count | 1 |
 | PDF media box | `3370.3937 × 2383.9370 pt` = `1189 × 841 mm` (A0 landscape) |
-| PPTX SHA-256 | `698a9bb3cf600a1d32cf7b5df0c96ae1b0c4893fdedd4f44f56a40fe106d0753` |
-| PDF SHA-256 | `434620d82760727eb895fe4a4860321445cfda978f1138a02d5d9387e35df2e8` |
+| PPTX SHA-256 | `24d6c164ae41ca39d6695c1277de88f690259c2176908160bdb66cbd6f1eed25` |
+| PDF SHA-256 | `757e719655862cdc386958f94ab141a76b3acdadab0f39a1731befb44b29feee` |
 | First-party PPTX re-import | Pass; one slide; byte hash matched the finalized artifact |
 | Package integrity | Pass; zero findings |
 
 ## Visual and typography QA
 
-- The editable PPTX was rendered at `4494 × 3179` pixels and visually inspected. The PDF was independently rendered at `3745 × 2649` pixels and visually inspected.
+- The finalized slide passed first-party re-import and automated geometry QA. The PDF was independently rendered at `7022 × 4967` pixels and visually inspected.
 - No clipped title, body, table, footer, logo, URL, or QR content was observed. No unintended object overlap or off-slide object was found.
 - Automated presentation-layout validation reported zero findings and zero warnings, including heading-fit and bullet-geometry checks.
 - The result matrix is a native editable PowerPoint table; the Economics → Computation → Behavior figure is composed of native editable PowerPoint shapes and connectors.
@@ -41,13 +43,13 @@ Official team code: FP10
 
 ## Link and QR verification
 
-The following public URLs returned HTTP 200 on 2026-09-26:
+The following public URLs returned HTTP 200 on 2026-09-27:
 
-- GitHub branch: <https://github.com/micL1222/gt-tools-demos/tree/ps2-memory-portability>
+- GitHub repository: <https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao>
 - Hugging Face Space: <https://huggingface.co/spaces/mickeystk/ps2-stay-or-switch-memory-portability>
 - Rendered Space endpoint: <https://mickeystk-ps2-stay-or-switch-memory-portability.static.hf.space/index.html>
 
-Both full URLs are visible and clickable in the PPTX and PDF. Both source QR PNGs decoded exactly to their printed URLs. After PDF export, both codes were decoded again from a 300-dpi rasterization of the PDF. The codes occupy approximately 32 mm square on the A0 page.
+Both full URLs are visible and clickable in the PPTX and PDF. Both source QR PNGs decoded exactly to their printed URLs. After PDF export, both codes were decoded again from a 150-dpi full-page rasterization of the PDF. The codes occupy approximately 32 mm square on the A0 page. The public Space README was also updated at revision `751f5cd` so its source-project link resolves to the same canonical repository.
 
 ## Cross-artifact parity
 
@@ -61,7 +63,7 @@ Both full URLs are visible and clickable in the PPTX and PDF. Both source QR PNG
 | `N=100,000`, seed `20603`, conditional efficiency `1` | paper main text and Appendix F; auction outputs | Match |
 | Twelve fixed scenarios, six Stay/six Switch | `outputs/behavioral_validation.json`; behavioral artifact | Match |
 | Page-session aggregation only; no participant conclusion | paper main text; behavioral evidence boundary | Match |
-| `85/85` tests | Full `cs206-ps2` environment test run on 2026-09-26 | Pass: 85 tests |
+| `85/85` tests | Full `cs206-ps2` environment test run on 2026-09-27 | Pass: 85 tests |
 
 The poster does not claim participant behavior, classroom auction play, symposium feedback, causal impact, market calibration, optimal-auction design, or resolved equilibrium selection. It keeps observed/computed results separate from the planned user test and symposium question.
 
