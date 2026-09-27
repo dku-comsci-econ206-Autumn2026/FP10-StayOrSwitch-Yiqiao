@@ -1,7 +1,7 @@
 \section{Three connected research questions and verified gap}
 AI-assistant memory can create switching costs and lock-in~\cite{farrell2007coordination}; portability can reduce that friction, but effects depend on the market~\cite{viard2007switching,kim2026portability}. Prior work models strategic compatibility in complementary products~\cite{jeon2023compatibility}. This project instead asks when two platforms with private implementation costs supply memory portability, whether strategic adoption matches a stated collective objective, and whether users would actually switch.
 
-\textbf{Q1---Economics:} Which type-contingent portability choices are Bayesian equilibria, and how do welfare and a verified-portability incentive compare? \textbf{Q2---Computation:} Do exhaustive checks, sweeps, and an allocation analogy reproduce the thresholds? \textbf{Q3---Behavior:} When a benchmark favors switching, does persistence reflect status quo or omitted trust, privacy, and personalization? The shared question is when portability becomes both supplied and useful. Figure~\ref{fig:teaser} separates completed platform evidence from the planned user test.
+\textbf{Q1---Economics:} Which type-contingent portability choices are Bayesian equilibria, and how do welfare and a verified-portability incentive compare? \textbf{Q2---Computation:} Do exhaustive checks, sweeps, and an allocation analogy reproduce the thresholds? \textbf{Q3---Behavior:} When a benchmark favors switching, does persistence reflect status quo or omitted trust, privacy, and personalization? The shared question is when portability becomes both supplied and useful. Figure~\ref{fig:teaser} separates completed platform and poster evidence from the planned user test.
 
 \section{Answer to Q1: incentives and strategic model}
 Nature independently draws each platform's private cost $c_i\in\{c_L,c_H\}$ with $\Pr(c_i=c_L)=p$; platforms simultaneously choose Portable ($P$) or Locked ($L$). With rival portability probability $q$,
@@ -18,7 +18,7 @@ Python enumerates all $4\times4=16$ pure profiles and checks every type against 
 The allocation analogy assigns one primary-assistant slot between two iid $U[0,1]$ platform values. Portability lowers the assumed reserve from $r=.5$ to $r=.2$. Second price uses truthful bids~\cite{vickrey1961counterspeculation}; first price uses $b(v;r)=(v^2+r^2)/(2v)$ for $v\ge r$. With seed 20603 and 100,000 common draws, allocation rises from .75193 (analytical .75) to .96004 (.96). Locked/portable unconditional payments are .41788/.36320 (first price) and .41818/.36414 (second price); conditional efficiency is one. The user is not auctioned, reserves are normalized assumptions, and no optimal-auction claim is made~\cite{myerson1981optimal}.
 
 \textbf{GitHub:} \GitHubLink. \textbf{Notebook:} \NotebookLink.\\
-\textbf{Hugging Face:} \HuggingFaceLink. \textbf{A0 poster:} \PosterLink.
+\textbf{Hugging Face:} \HuggingFaceLink. \textbf{A0 poster:} \PosterLink; no symposium result is claimed.
 
 \clearpage\balance
 \section{Answer to Q3: behavior and interdisciplinary integration}
@@ -36,7 +36,7 @@ Consider a student or writer deciding whether to move years of AI-assistant cont
 \textbf{Horizon}&\textbf{Milestone and evidence}\\\midrule
 Foundation&Incomplete-information games; switching costs; auction design.\\
 PS2&Two pure BNE, welfare/incentive comparisons, seeded allocation simulation, public decision artifact.\\
-Symposium&Planned A0 claim and genuine peer challenges; none recorded yet.\\
+Symposium&Present completed A0 poster and receive genuine peer challenges; none recorded yet.\\
 Next study&Consent-based scenario comparison with privacy and access safeguards.\\
 2056&Validated interoperable-memory institutions with accountable correction.\\\bottomrule
 \end{tabularx}\end{table}
@@ -45,7 +45,7 @@ Next study&Consent-based scenario comparison with privacy and access safeguards.
 By 2056, the aspiration is a tested theory and computational design for interoperable AI memory that aligns platform incentives with user agency. Progress would require multi-market validation, secure standards, mechanism trials, and behavioral evidence; neither awards nor impact are predicted by PS2.
 
 \subsection*{Open Science Statement}
-The canonical repository contains source, two executed notebooks, pinned dependencies, deterministic outputs, tests, and evidence boundaries. From the repository root, the recorded regression suite returns 85/85; Appendix~A gives the commands. The Static Space is public; it stores no shared participant dataset. The repository has no new blanket license grant. The poster remains planned.
+The canonical repository contains source, two executed notebooks, pinned dependencies, deterministic outputs, tests, evidence boundaries, and the review-ready A0 poster PPTX/PDF. Review-ready release identifier: \texttt{ps2-review-ready-v1}. From the repository root, the recorded regression suite returns 85/85; Appendix~A gives the commands. The Static Space is public; it stores no shared participant dataset. The repository has no new blanket license grant. Symposium feedback, peer review, and participant inference remain pending.
 
 \subsection*{Statement of Contribution to the UN's SDGs}
 No demonstrated SDG impact is claimed. A future secure portability standard could be evaluated against SDG target 9.1's inclusive-infrastructure objective~\cite{un_sdg} using successful export/import, accessibility, privacy incidents, and switching completion as indicators. Possible harms include data leakage and exclusion when transferred context is incomplete; audits and user-controlled correction are required.

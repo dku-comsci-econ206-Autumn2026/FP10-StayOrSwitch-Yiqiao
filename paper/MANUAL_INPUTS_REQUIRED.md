@@ -8,9 +8,8 @@ The following facts were not found in author-owned records and are not fabricate
 
 1. Replace `Pending course assignment` with the official September 28
    symposium session.
-2. After creating the A0 poster from the official course template, replace the
-   planned-poster text with its stable filename or URL and perform the parity
-   check in Appendix F.
+2. Present the completed A0 poster at the symposium and record only genuine
+   questions, peer reviews, and revision decisions.
 3. After the symposium, add only genuine classroom-auction observations,
    assigned peer reviews, questions, and Keep/Revise/Investigate decisions;
    then rerun the affected tests for the September 30 final version.

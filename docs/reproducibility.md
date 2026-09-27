@@ -6,6 +6,8 @@ Canonical repository:
 Clone URL:
 `https://github.com/dku-comsci-econ206-Autumn2026/FP10-StayOrSwitch-Yiqiao.git`
 
+Stable review-ready release identifier: `ps2-review-ready-v1`
+
 ## Recorded host
 
 - Operating system: macOS 26.5.2

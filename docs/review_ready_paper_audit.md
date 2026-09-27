@@ -15,6 +15,8 @@ Final paper: `submission/PS2-FP10-StayOrSwitch.pdf`
 
 Final Overleaf source: `submission/PS2-FP10-StayOrSwitch-Overleaf-Source.zip`
 
+Stable review-ready release: `ps2-review-ready-v1`
+
 ## Claim parity
 
 | Paper claim | Repository evidence | Audit result |
@@ -48,8 +50,9 @@ project-generated equilibria.
   outputs, commands, and limits.
 - **Hugging Face:** same user-level decision setting, 12 scenarios, evidence
   boundary, and current-page-session privacy scope.
-- **A0 poster:** not yet created; paper marks it planned and makes no parity
-  claim.
+- **A0 poster:** completed from the official course template; paper values,
+  evidence boundaries, links, QR codes, and public-artifact limits were
+  parity-checked. Symposium feedback remains pending.
 - **Symposium/peer review/classroom auction:** not yet observed; no records are
   fabricated.
 
@@ -80,12 +83,11 @@ project-generated equilibria.
 - Active source, generated paper, ZIP, poster, notebook, and deployment-reference
   scans found no legacy personal-repository URL or former branch URL.
 - Review-ready PDF SHA-256:
-  `dd666c77f903b950193bd28a1f698519c5a65653077c8d5946cdfd48a3673d85`.
+  `41dfc89d71ee82df3983aa450d059bc538643c58a13d4fdd633b695f80f9d5be`.
 - Overleaf source ZIP SHA-256:
-  `7c8f123eaaeb61427a850501cfb98bf45b4fa8adae77812c8c6dd8f2a55c05b2`.
+  `725acc67dc3a0f9ee138e61391f1ea68865594e7673925dc4c2ace3b6ad6d7ff`.
 
 ## Manual facts still required
 
-The official team code is FP10. The symposium session, finished A0 poster
-reference, and post-September-28 evidence remain pending. See
-`paper/MANUAL_INPUTS_REQUIRED.md`.
+The official team code is FP10. The symposium session, peer reviews, and
+post-September-28 evidence remain pending. See `paper/MANUAL_INPUTS_REQUIRED.md`.

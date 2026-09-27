@@ -25,9 +25,11 @@ working-copy driver for the official guidance rail.
 - Historical computational/deployment snapshot:
   `f9523b0fdd3f5dc4739dd1f08fe1265e049c1271`
 - Public behavioral Space revision: `9ffb3cadcb80d558cb1d4473d227a383b8a5aa50`
+- Stable review-ready release: `ps2-review-ready-v1`
 - Test status at paper build: 85 passed, 0 skipped, 0 failures, 0 errors
 - Behavioral conclusion: none claimed
-- Classroom-auction, A0-poster, symposium, and peer-review evidence: pending
+- Review-ready A0 poster: completed and parity-checked
+- Classroom-auction, symposium, and peer-review evidence: pending
 
 See `MANUAL_INPUTS_REQUIRED.md` before submission and the repository-level
 `docs/review_ready_paper_audit.md` for claim parity.
